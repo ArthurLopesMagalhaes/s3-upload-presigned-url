@@ -56,7 +56,6 @@ export function App() {
                   <span className="text-sm">{file.name}</span>
                   <Button
                     variant="destructive"
-                    size="icon"
                     onClick={() => handleRemoveFile(index)}
                   >
                     <Trash2Icon className="size-4" />
