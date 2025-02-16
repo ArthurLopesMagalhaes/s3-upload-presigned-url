@@ -22,6 +22,15 @@ export function App() {
         prevFiles.concat(acceptedFiles.map((file) => ({ file, progress: 0 })))
       );
     },
+    maxSize: 2 * 1024 * 1024, // 2MB
+    onDropRejected: (files) => {
+      files.forEach(({ file, errors }) => {
+        toast.error(
+          `${file.name} cannot be uploaded because it exceeds the size limit.`
+        );
+        console.log(JSON.stringify(errors, null, 2));
+      });
+    },
   });
 
   function handleRemoveUpload(removingIndex: number) {
@@ -91,7 +100,7 @@ export function App() {
         </div>
 
         {uploads.length > 0 && (
-          <div className="mt-6">
+          <div className="mt-6 border border-dashed p-3 rounded-md">
             <h2 className="font-medium text-2xl tracking-tight">
               Selected files
             </h2>
